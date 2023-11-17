@@ -24,9 +24,13 @@ public class Main {
             System.out.println("Connexion à la base de données réussie!");
             System.out.println(connection);
 
+            miseAjour();
+            System.out.println();
+            lecture();
+            System.out.println();
             // creation();
-
-            // Exemple de lecture de données
+            supprimer();
+            System.out.println();
             lecture();
 
 
@@ -49,12 +53,11 @@ public class Main {
 
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-            System.out.println("Connexion à la base de données réussie!");
-            System.out.println(connection);
+
 
             Statement st = connection.createStatement();
             int nb = st.executeUpdate("INSERT INTO FOURNISSEUR (NOM) VALUES ('DIGI')");
-            System.out.println("Nombre d'éléments modifiés : " + nb);
+            System.out.println("Nombre d'éléments insérés : " + nb);
 
             st.close();
         } catch (SQLException e) {
@@ -75,8 +78,7 @@ public class Main {
 
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-            System.out.println("Connexion à la base de données réussie!");
-            System.out.println(connection);
+
 
             Statement st = connection.createStatement();
             ResultSet curseur = st.executeQuery("SELECT ID, NOM FROM FOURNISSEUR");
@@ -101,4 +103,56 @@ public class Main {
             }
         }
     }
+    private static void miseAjour(){
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
+
+            Statement st = connection.createStatement();
+            int up = st.executeUpdate("UPDATE FOURNISSEUR SET NOM='Intel' WHERE ID=1");
+
+            System.out.println("Nombre d'éléments modifiés : " + up);
+
+            st.close();
+        } catch (SQLException e) {
+            throw new RuntimeException("Attention : " + e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Attention : " + e.getMessage());
+                }
+            }
+        }
+
+
+    }
+    private static void supprimer(){
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
+
+            Statement st = connection.createStatement();
+            int up = st.executeUpdate("DELETE FROM FOURNISSEUR WHERE  ID=1");
+
+            System.out.println("Nombre d'éléments supprimés : " + up);
+
+            st.close();
+        } catch (SQLException e) {
+            throw new RuntimeException("Attention : " + e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Attention : " + e.getMessage());
+                }
+            }
+        }
+
+
+    }
+
+
 }
