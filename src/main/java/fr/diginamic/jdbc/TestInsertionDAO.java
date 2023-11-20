@@ -1,7 +1,7 @@
 package fr.diginamic.jdbc;
 
 import fr.diginamic.jdbc.dal.FournisseurDAO;
-import fr.diginamic.jdbc.dal.jdbc.FournisseurDAOJDBC;
+import fr.diginamic.jdbc.dal.jdbc.FournisseurDAOJDBCSecurise;
 import fr.diginamic.jdbc.entites.Fournisseur;
 
 import java.sql.SQLException;
@@ -11,8 +11,8 @@ public class TestInsertionDAO {
 
 
         try {
-            FournisseurDAO dao = new FournisseurDAOJDBC();
-            Fournisseur nouveauFournisseur = new Fournisseur("Intel");
+            FournisseurDAO dao = new FournisseurDAOJDBCSecurise();
+            Fournisseur nouveauFournisseur = new Fournisseur("Centre");
             dao.insert(nouveauFournisseur);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
