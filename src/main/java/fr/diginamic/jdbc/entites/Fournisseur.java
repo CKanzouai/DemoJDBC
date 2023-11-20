@@ -5,6 +5,18 @@ public class Fournisseur {
     private int id;
     private String nom;
 
+    public Fournisseur(String nom) {
+        this.nom = nom;
+    }
+
+    @Override
+    public String toString() {
+        return "Fournisseur{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                '}';
+    }
+
     public Fournisseur(int id, String nom) {
         this.id = id;
         this.nom = nom;
